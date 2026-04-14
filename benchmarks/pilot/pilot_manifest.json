@@ -1,0 +1,1195 @@
+{
+  "metadata": {
+    "name": "qlcoder_pilot_benchmark",
+    "version": "0.1",
+    "description": "Curated pilot benchmark for patch-to-variant CodeQL synthesis. Each seed CVE keeps the original vuln/fix evaluation pair and adds positive variants plus a small number of contrastive negatives when same-repo alternatives exist.",
+    "created_at_utc": "2026-04-11T17:19:24.637347+00:00",
+    "seed_count": 8,
+    "family_count": 5,
+    "referenced_cve_count": 24,
+    "positive_variant_links": 19,
+    "hard_negative_links": 1,
+    "runnable_seed_count": 8
+  },
+  "asset_summary": {
+    "missing_repo_or_diff_all": [],
+    "missing_dbs_all": [],
+    "missing_repo_or_diff_seeds": [],
+    "missing_dbs_seeds": []
+  },
+  "families": [
+    {
+      "family_id": "cwe-022-path-traversal",
+      "family_name": "Path Traversal",
+      "expected_cwe_ids": [
+        "CWE-022",
+        "CWE-22"
+      ],
+      "seeds": [
+        {
+          "cve_id": "CVE-2016-9177",
+          "note": "Spark path traversal seed with one same-repo sibling and two cross-repo positives.",
+          "positive_variants": [
+            {
+              "cve_id": "CVE-2018-9159",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same vulnerability family in spark."
+            },
+            {
+              "cve_id": "CVE-2018-1000850",
+              "variant_type": "cross_repo",
+              "construction_note": "Cross-repo path traversal in retrofit."
+            },
+            {
+              "cve_id": "CVE-2018-17297",
+              "variant_type": "cross_repo",
+              "construction_note": "Cross-repo path traversal in hutool."
+            }
+          ],
+          "hard_negatives": []
+        },
+        {
+          "cve_id": "CVE-2018-12542",
+          "note": "Vert.x path traversal seed with a same-repo sibling and cross-repo positives.",
+          "positive_variants": [
+            {
+              "cve_id": "CVE-2019-17640",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same vulnerability family in vertx-web."
+            },
+            {
+              "cve_id": "CVE-2018-1000850",
+              "variant_type": "cross_repo",
+              "construction_note": "Cross-repo path traversal in retrofit."
+            },
+            {
+              "cve_id": "CVE-2019-0225",
+              "variant_type": "cross_repo",
+              "construction_note": "Cross-repo path traversal in jspwiki."
+            }
+          ],
+          "hard_negatives": []
+        }
+      ]
+    },
+    {
+      "family_id": "cwe-079-xss",
+      "family_name": "Cross-Site Scripting",
+      "expected_cwe_ids": [
+        "CWE-079",
+        "CWE-79"
+      ],
+      "seeds": [
+        {
+          "cve_id": "CVE-2019-10077",
+          "note": "JSPWiki XSS seed with multiple same-repo sibling CVEs and one same-repo contrastive path traversal negative.",
+          "positive_variants": [
+            {
+              "cve_id": "CVE-2019-10078",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same XSS family in jspwiki."
+            },
+            {
+              "cve_id": "CVE-2019-10076",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same XSS family in jspwiki."
+            }
+          ],
+          "hard_negatives": [
+            {
+              "cve_id": "CVE-2019-0225",
+              "negative_type": "same_repo_other_family",
+              "construction_note": "Same repository but path traversal instead of XSS.",
+              "negative_cwe_id": "CWE-022"
+            }
+          ]
+        },
+        {
+          "cve_id": "CVE-2017-14735",
+          "note": "AntiSamy XSS seed with multiple same-repo sibling CVEs.",
+          "positive_variants": [
+            {
+              "cve_id": "CVE-2016-10006",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same XSS family in antisamy."
+            },
+            {
+              "cve_id": "CVE-2022-29577",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same XSS family in antisamy."
+            },
+            {
+              "cve_id": "CVE-2022-28367",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same XSS family in antisamy."
+            }
+          ],
+          "hard_negatives": []
+        }
+      ]
+    },
+    {
+      "family_id": "cwe-078-command-injection",
+      "family_name": "Command Injection",
+      "expected_cwe_ids": [
+        "CWE-078"
+      ],
+      "seeds": [
+        {
+          "cve_id": "CVE-2013-7285",
+          "note": "XStream command injection seed with two same-repo sibling CVEs.",
+          "positive_variants": [
+            {
+              "cve_id": "CVE-2021-21345",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same command injection family in xstream."
+            },
+            {
+              "cve_id": "CVE-2020-26217",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same command injection family in xstream."
+            }
+          ],
+          "hard_negatives": []
+        }
+      ]
+    },
+    {
+      "family_id": "cwe-094-code-injection",
+      "family_name": "Code Injection",
+      "expected_cwe_ids": [
+        "CWE-094"
+      ],
+      "seeds": [
+        {
+          "cve_id": "CVE-2023-37582",
+          "note": "RocketMQ code injection seed with a same-repo sibling.",
+          "positive_variants": [
+            {
+              "cve_id": "CVE-2023-33246",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same code injection family in rocketmq."
+            }
+          ],
+          "hard_negatives": []
+        }
+      ]
+    },
+    {
+      "family_id": "cwe-502-deserialization",
+      "family_name": "Deserialization of Untrusted Data",
+      "expected_cwe_ids": [
+        "CWE-502"
+      ],
+      "seeds": [
+        {
+          "cve_id": "CVE-2025-27818",
+          "note": "Kafka deserialization seed paired with cross-repo variants from InLong.",
+          "positive_variants": [
+            {
+              "cve_id": "CVE-2025-27531",
+              "variant_type": "cross_repo",
+              "construction_note": "Cross-repo deserialization issue in InLong."
+            }
+          ],
+          "hard_negatives": []
+        },
+        {
+          "cve_id": "CVE-2025-27531",
+          "note": "InLong deserialization seed with multiple same-repo siblings and one cross-repo positive.",
+          "positive_variants": [
+            {
+              "cve_id": "CVE-2025-27526",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same deserialization family in InLong."
+            },
+            {
+              "cve_id": "CVE-2025-27528",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same deserialization family in InLong."
+            },
+            {
+              "cve_id": "CVE-2025-27522",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same deserialization family in InLong."
+            },
+            {
+              "cve_id": "CVE-2025-27818",
+              "variant_type": "cross_repo",
+              "construction_note": "Cross-repo deserialization issue in Kafka."
+            }
+          ],
+          "hard_negatives": []
+        }
+      ]
+    }
+  ],
+  "samples": {
+    "CVE-2013-7285": {
+      "cve_id": "CVE-2013-7285",
+      "family_id": "cwe-078-command-injection",
+      "project": "xstream",
+      "project_slug": "x-stream__xstream_CVE-2013-7285_1.4.6",
+      "github_username": "x-stream",
+      "github_repository_name": "xstream",
+      "github_url": "https://github.com/x-stream/xstream",
+      "cwe_id": "CWE-078",
+      "normalized_cwe_id": "CWE-078",
+      "cwe_name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2013-7285",
+        "repo_dir": "/root/qlcoder/cves/CVE-2013-7285/xstream",
+        "diff_path": "/root/qlcoder/cves/CVE-2013-7285/CVE-2013-7285.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2013-7285/CVE-2013-7285-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2013-7285/CVE-2013-7285-fix"
+      },
+      "ground_truth_files": [
+        "xstream/src/java/com/thoughtworks/xstream/XStream.java",
+        "xstream/src/java/com/thoughtworks/xstream/mapper/CachingMapper.java"
+      ],
+      "ground_truth_methods": [
+        "xstream/src/java/com/thoughtworks/xstream/XStream.java:XStream:buildMapper",
+        "xstream/src/java/com/thoughtworks/xstream/XStream.java:XStream:buildMapperDynamically",
+        "xstream/src/java/com/thoughtworks/xstream/XStream.java:XStream:setupAliases",
+        "xstream/src/java/com/thoughtworks/xstream/mapper/CachingMapper.java:CachingMapper:flushCache",
+        "xstream/src/java/com/thoughtworks/xstream/mapper/CachingMapper.java:CachingMapper:realClass"
+      ],
+      "ground_truth_summary": {
+        "num_files": 2,
+        "num_methods": 5,
+        "non_test_rows": 5
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2016-10006": {
+      "cve_id": "CVE-2016-10006",
+      "family_id": "cwe-079-xss",
+      "project": "antisamy",
+      "project_slug": "nahsra__antisamy_CVE-2016-10006_1.5.3",
+      "github_username": "nahsra",
+      "github_repository_name": "antisamy",
+      "github_url": "https://github.com/nahsra/antisamy",
+      "cwe_id": "CWE-079",
+      "normalized_cwe_id": "CWE-079",
+      "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2016-10006",
+        "repo_dir": "/root/qlcoder/cves/CVE-2016-10006/antisamy",
+        "diff_path": "/root/qlcoder/cves/CVE-2016-10006/CVE-2016-10006.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2016-10006/CVE-2016-10006-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2016-10006/CVE-2016-10006-fix"
+      },
+      "ground_truth_files": [
+        "src/main/java/org/owasp/validator/html/scan/MagicSAXFilter.java"
+      ],
+      "ground_truth_methods": [
+        "src/main/java/org/owasp/validator/html/scan/MagicSAXFilter.java:MagicSAXFilter:startElement"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 1,
+        "non_test_rows": 2
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2016-9177": {
+      "cve_id": "CVE-2016-9177",
+      "family_id": "cwe-022-path-traversal",
+      "project": "spark",
+      "project_slug": "perwendel__spark_CVE-2016-9177_2.5.1",
+      "github_username": "perwendel",
+      "github_repository_name": "spark",
+      "github_url": "https://github.com/perwendel/spark",
+      "cwe_id": "CWE-022",
+      "normalized_cwe_id": "CWE-022",
+      "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2016-9177",
+        "repo_dir": "/root/qlcoder/cves/CVE-2016-9177/spark",
+        "diff_path": "/root/qlcoder/cves/CVE-2016-9177/CVE-2016-9177.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2016-9177/CVE-2016-9177-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2016-9177/CVE-2016-9177-fix"
+      },
+      "ground_truth_files": [
+        "src/main/java/spark/resource/ClassPathResourceHandler.java",
+        "src/main/java/spark/resource/ExternalResourceHandler.java",
+        "src/main/java/spark/staticfiles/StaticFilesConfiguration.java",
+        "src/main/java/spark/utils/StringUtils.java"
+      ],
+      "ground_truth_methods": [
+        "src/main/java/spark/resource/ClassPathResourceHandler.java:ClassPathResourceHandler:getResource",
+        "src/main/java/spark/resource/ExternalResourceHandler.java:ExternalResourceHandler:getResource",
+        "src/main/java/spark/staticfiles/StaticFilesConfiguration.java:StaticFilesConfiguration:configure",
+        "src/main/java/spark/staticfiles/StaticFilesConfiguration.java:StaticFilesConfiguration:configureJarCase",
+        "src/main/java/spark/staticfiles/StaticFilesConfiguration.java:StaticFilesConfiguration:consumeWithFileResourceHandlers",
+        "src/main/java/spark/staticfiles/StaticFilesConfiguration.java:StaticFilesConfiguration:setExpireTimeSeconds",
+        "src/main/java/spark/utils/StringUtils.java:StringUtils:toString"
+      ],
+      "ground_truth_summary": {
+        "num_files": 4,
+        "num_methods": 7,
+        "non_test_rows": 7
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2017-14735": {
+      "cve_id": "CVE-2017-14735",
+      "family_id": "cwe-079-xss",
+      "project": "antisamy",
+      "project_slug": "nahsra__antisamy_CVE-2017-14735_1.5.6",
+      "github_username": "nahsra",
+      "github_repository_name": "antisamy",
+      "github_url": "https://github.com/nahsra/antisamy",
+      "cwe_id": "CWE-079",
+      "normalized_cwe_id": "CWE-079",
+      "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2017-14735",
+        "repo_dir": "/root/qlcoder/cves/CVE-2017-14735/antisamy",
+        "diff_path": "/root/qlcoder/cves/CVE-2017-14735/CVE-2017-14735.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2017-14735/CVE-2017-14735-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2017-14735/CVE-2017-14735-fix"
+      },
+      "ground_truth_files": [
+        "src/main/java/org/owasp/validator/html/Policy.java",
+        "src/main/java/org/owasp/validator/html/scan/AntiSamyDOMScanner.java",
+        "src/main/java/org/owasp/validator/html/scan/AntiSamySAXScanner.java"
+      ],
+      "ground_truth_methods": [
+        "src/main/java/org/owasp/validator/html/Policy.java:Policy:parseAllowedEmptyTags",
+        "src/main/java/org/owasp/validator/html/Policy.java:Policy:parseCommonAttributes",
+        "src/main/java/org/owasp/validator/html/Policy.java:Policy:parseGlobalAttributes",
+        "src/main/java/org/owasp/validator/html/Policy.java:Policy:parseRequireClosingTags",
+        "src/main/java/org/owasp/validator/html/scan/AntiSamyDOMScanner.java:AntiSamyDOMScanner:scan",
+        "src/main/java/org/owasp/validator/html/scan/AntiSamySAXScanner.java:AntiSamySAXScanner:scan"
+      ],
+      "ground_truth_summary": {
+        "num_files": 3,
+        "num_methods": 6,
+        "non_test_rows": 6
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2018-1000850": {
+      "cve_id": "CVE-2018-1000850",
+      "family_id": "cwe-022-path-traversal",
+      "project": "retrofit",
+      "project_slug": "square__retrofit_CVE-2018-1000850_2.4.0",
+      "github_username": "square",
+      "github_repository_name": "retrofit",
+      "github_url": "https://github.com/square/retrofit",
+      "cwe_id": "CWE-022",
+      "normalized_cwe_id": "CWE-022",
+      "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2018-1000850",
+        "repo_dir": "/root/qlcoder/cves/CVE-2018-1000850/retrofit",
+        "diff_path": "/root/qlcoder/cves/CVE-2018-1000850/CVE-2018-1000850.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2018-1000850/CVE-2018-1000850-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2018-1000850/CVE-2018-1000850-fix"
+      },
+      "ground_truth_files": [
+        "retrofit/src/main/java/retrofit2/RequestBuilder.java"
+      ],
+      "ground_truth_methods": [
+        "retrofit/src/main/java/retrofit2/RequestBuilder.java:RequestBuilder:RequestBuilder",
+        "retrofit/src/main/java/retrofit2/RequestBuilder.java:RequestBuilder:addPathParam",
+        "retrofit/src/main/java/retrofit2/RequestBuilder.java:RequestBuilder:canonicalizeForPath"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 3,
+        "non_test_rows": 4
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2018-12542": {
+      "cve_id": "CVE-2018-12542",
+      "family_id": "cwe-022-path-traversal",
+      "project": "vertx-web",
+      "project_slug": "vert-x3__vertx-web_CVE-2018-12542_3.5.3.CR1",
+      "github_username": "vert-x3",
+      "github_repository_name": "vertx-web",
+      "github_url": "https://github.com/vert-x3/vertx-web",
+      "cwe_id": "CWE-022",
+      "normalized_cwe_id": "CWE-022",
+      "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2018-12542",
+        "repo_dir": "/root/qlcoder/cves/CVE-2018-12542/vertx-web",
+        "diff_path": "/root/qlcoder/cves/CVE-2018-12542/CVE-2018-12542.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2018-12542/CVE-2018-12542-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2018-12542/CVE-2018-12542-fix"
+      },
+      "ground_truth_files": [
+        "vertx-web/src/main/java/io/vertx/ext/web/handler/impl/StaticHandlerImpl.java"
+      ],
+      "ground_truth_methods": [
+        "vertx-web/src/main/java/io/vertx/ext/web/handler/impl/StaticHandlerImpl.java:StaticHandlerImpl:handle",
+        "vertx-web/src/main/java/io/vertx/ext/web/handler/impl/StaticHandlerImpl.java:StaticHandlerImpl:sendStatic"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 2,
+        "non_test_rows": 2
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2018-17297": {
+      "cve_id": "CVE-2018-17297",
+      "family_id": "cwe-022-path-traversal",
+      "project": "hutool",
+      "project_slug": "dromara__hutool_CVE-2018-17297_4.1.11",
+      "github_username": "dromara",
+      "github_repository_name": "hutool",
+      "github_url": "https://github.com/dromara/hutool",
+      "cwe_id": "CWE-022",
+      "normalized_cwe_id": "CWE-022",
+      "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2018-17297",
+        "repo_dir": "/root/qlcoder/cves/CVE-2018-17297/hutool",
+        "diff_path": "/root/qlcoder/cves/CVE-2018-17297/CVE-2018-17297.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2018-17297/CVE-2018-17297-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2018-17297/CVE-2018-17297-fix"
+      },
+      "ground_truth_files": [
+        "hutool-core/src/main/java/cn/hutool/core/io/FileUtil.java",
+        "hutool-core/src/main/java/cn/hutool/core/util/ZipUtil.java"
+      ],
+      "ground_truth_methods": [
+        "hutool-core/src/main/java/cn/hutool/core/io/FileUtil.java:FileUtil:file",
+        "hutool-core/src/main/java/cn/hutool/core/util/ZipUtil.java:ZipUtil:unzip"
+      ],
+      "ground_truth_summary": {
+        "num_files": 2,
+        "num_methods": 2,
+        "non_test_rows": 5
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2018-9159": {
+      "cve_id": "CVE-2018-9159",
+      "family_id": "cwe-022-path-traversal",
+      "project": "spark",
+      "project_slug": "perwendel__spark_CVE-2018-9159_2.7.1",
+      "github_username": "perwendel",
+      "github_repository_name": "spark",
+      "github_url": "https://github.com/perwendel/spark",
+      "cwe_id": "CWE-022",
+      "normalized_cwe_id": "CWE-022",
+      "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2018-9159",
+        "repo_dir": "/root/qlcoder/cves/CVE-2018-9159/spark",
+        "diff_path": "/root/qlcoder/cves/CVE-2018-9159/CVE-2018-9159.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2018-9159/CVE-2018-9159-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2018-9159/CVE-2018-9159-fix"
+      },
+      "ground_truth_files": [
+        "src/main/java/spark/resource/ClassPathResource.java"
+      ],
+      "ground_truth_methods": [
+        "src/main/java/spark/resource/ClassPathResource.java:ClassPathResource:ClassPathResource",
+        "src/main/java/spark/resource/ClassPathResource.java:ClassPathResource:equals",
+        "src/main/java/spark/resource/ClassPathResource.java:ClassPathResource:exists",
+        "src/main/java/spark/resource/ClassPathResource.java:ClassPathResource:getInputStream",
+        "src/main/java/spark/resource/ClassPathResource.java:ClassPathResource:getPath",
+        "src/main/java/spark/resource/ClassPathResource.java:ClassPathResource:getURL"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 6,
+        "non_test_rows": 9
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2019-0225": {
+      "cve_id": "CVE-2019-0225",
+      "family_id": "cwe-022-path-traversal",
+      "project": "jspwiki",
+      "project_slug": "apache__jspwiki_CVE-2019-0225_2.11.0.M2",
+      "github_username": "apache",
+      "github_repository_name": "jspwiki",
+      "github_url": "https://github.com/apache/jspwiki",
+      "cwe_id": "CWE-022",
+      "normalized_cwe_id": "CWE-022",
+      "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2019-0225",
+        "repo_dir": "/root/qlcoder/cves/CVE-2019-0225/jspwiki",
+        "diff_path": "/root/qlcoder/cves/CVE-2019-0225/CVE-2019-0225.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2019-0225/CVE-2019-0225-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2019-0225/CVE-2019-0225-fix"
+      },
+      "ground_truth_files": [
+        "jspwiki-main/src/main/java/org/apache/wiki/url/DefaultURLConstructor.java"
+      ],
+      "ground_truth_methods": [
+        "jspwiki-main/src/main/java/org/apache/wiki/url/DefaultURLConstructor.java:DefaultURLConstructor:getForwardPage"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 1,
+        "non_test_rows": 1
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2019-10076": {
+      "cve_id": "CVE-2019-10076",
+      "family_id": "cwe-079-xss",
+      "project": "jspwiki",
+      "project_slug": "apache__jspwiki_CVE-2019-10076_2.11.0.M3",
+      "github_username": "apache",
+      "github_repository_name": "jspwiki",
+      "github_url": "https://github.com/apache/jspwiki",
+      "cwe_id": "CWE-079",
+      "normalized_cwe_id": "CWE-079",
+      "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2019-10076",
+        "repo_dir": "/root/qlcoder/cves/CVE-2019-10076/jspwiki",
+        "diff_path": "/root/qlcoder/cves/CVE-2019-10076/CVE-2019-10076.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2019-10076/CVE-2019-10076-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2019-10076/CVE-2019-10076-fix"
+      },
+      "ground_truth_files": [
+        "jspwiki-main/src/main/java/org/apache/wiki/tags/LinkToTag.java"
+      ],
+      "ground_truth_methods": [
+        "jspwiki-main/src/main/java/org/apache/wiki/tags/LinkToTag.java:LinkToTag:doWikiStartTag",
+        "jspwiki-main/src/main/java/org/apache/wiki/tags/LinkToTag.java:LinkToTag:initTag",
+        "jspwiki-main/src/main/java/org/apache/wiki/tags/LinkToTag.java:LinkToTag:setAccesskey"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 3,
+        "non_test_rows": 3
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2019-10077": {
+      "cve_id": "CVE-2019-10077",
+      "family_id": "cwe-079-xss",
+      "project": "jspwiki",
+      "project_slug": "apache__jspwiki_CVE-2019-10077_2.11.0.M3",
+      "github_username": "apache",
+      "github_repository_name": "jspwiki",
+      "github_url": "https://github.com/apache/jspwiki",
+      "cwe_id": "CWE-079",
+      "normalized_cwe_id": "CWE-079",
+      "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2019-10077",
+        "repo_dir": "/root/qlcoder/cves/CVE-2019-10077/jspwiki",
+        "diff_path": "/root/qlcoder/cves/CVE-2019-10077/CVE-2019-10077.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2019-10077/CVE-2019-10077-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2019-10077/CVE-2019-10077-fix"
+      },
+      "ground_truth_files": [
+        "jspwiki-main/src/main/java/org/apache/wiki/parser/JSPWikiMarkupParser.java"
+      ],
+      "ground_truth_methods": [
+        "jspwiki-main/src/main/java/org/apache/wiki/parser/JSPWikiMarkupParser.java:JSPWikiMarkupParser:handleDiv",
+        "jspwiki-main/src/main/java/org/apache/wiki/parser/JSPWikiMarkupParser.java:JSPWikiMarkupParser:handleHyperlinks"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 2,
+        "non_test_rows": 2
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2019-10078": {
+      "cve_id": "CVE-2019-10078",
+      "family_id": "cwe-079-xss",
+      "project": "jspwiki",
+      "project_slug": "apache__jspwiki_CVE-2019-10078_2.11.0.M3",
+      "github_username": "apache",
+      "github_repository_name": "jspwiki",
+      "github_url": "https://github.com/apache/jspwiki",
+      "cwe_id": "CWE-079",
+      "normalized_cwe_id": "CWE-079",
+      "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2019-10078",
+        "repo_dir": "/root/qlcoder/cves/CVE-2019-10078/jspwiki",
+        "diff_path": "/root/qlcoder/cves/CVE-2019-10078/CVE-2019-10078.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2019-10078/CVE-2019-10078-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2019-10078/CVE-2019-10078-fix"
+      },
+      "ground_truth_files": [
+        "jspwiki-main/src/main/java/org/apache/wiki/plugin/ReferredPagesPlugin.java"
+      ],
+      "ground_truth_methods": [
+        "jspwiki-main/src/main/java/org/apache/wiki/plugin/ReferredPagesPlugin.java:ReferredPagesPlugin:execute",
+        "jspwiki-main/src/main/java/org/apache/wiki/plugin/ReferredPagesPlugin.java:ReferredPagesPlugin:handleLinks"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 2,
+        "non_test_rows": 2
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2019-17640": {
+      "cve_id": "CVE-2019-17640",
+      "family_id": "cwe-022-path-traversal",
+      "project": "vertx-web",
+      "project_slug": "vert-x3__vertx-web_CVE-2019-17640_3.9.3",
+      "github_username": "vert-x3",
+      "github_repository_name": "vertx-web",
+      "github_url": "https://github.com/vert-x3/vertx-web",
+      "cwe_id": "CWE-022",
+      "normalized_cwe_id": "CWE-022",
+      "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2019-17640",
+        "repo_dir": "/root/qlcoder/cves/CVE-2019-17640/vertx-web",
+        "diff_path": "/root/qlcoder/cves/CVE-2019-17640/CVE-2019-17640.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2019-17640/CVE-2019-17640-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2019-17640/CVE-2019-17640-fix"
+      },
+      "ground_truth_files": [
+        "vertx-web/src/main/java/io/vertx/ext/web/handler/impl/StaticHandlerImpl.java"
+      ],
+      "ground_truth_methods": [
+        "vertx-web/src/main/java/io/vertx/ext/web/handler/impl/StaticHandlerImpl.java:StaticHandlerImpl:handle"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 1,
+        "non_test_rows": 1
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2020-26217": {
+      "cve_id": "CVE-2020-26217",
+      "family_id": "cwe-078-command-injection",
+      "project": "xstream",
+      "project_slug": "x-stream__xstream_CVE-2020-26217_1.4.14-java7",
+      "github_username": "x-stream",
+      "github_repository_name": "xstream",
+      "github_url": "https://github.com/x-stream/xstream",
+      "cwe_id": "CWE-078",
+      "normalized_cwe_id": "CWE-078",
+      "cwe_name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2020-26217",
+        "repo_dir": "/root/qlcoder/cves/CVE-2020-26217/xstream",
+        "diff_path": "/root/qlcoder/cves/CVE-2020-26217/CVE-2020-26217.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2020-26217/CVE-2020-26217-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2020-26217/CVE-2020-26217-fix"
+      },
+      "ground_truth_files": [
+        "xstream/src/java/com/thoughtworks/xstream/XStream.java"
+      ],
+      "ground_truth_methods": [
+        "xstream/src/java/com/thoughtworks/xstream/XStream.java:XStream:setupSecurity"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 1,
+        "non_test_rows": 1
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2021-21345": {
+      "cve_id": "CVE-2021-21345",
+      "family_id": "cwe-078-command-injection",
+      "project": "xstream",
+      "project_slug": "x-stream__xstream_CVE-2021-21345_1.4.15",
+      "github_username": "x-stream",
+      "github_repository_name": "xstream",
+      "github_url": "https://github.com/x-stream/xstream",
+      "cwe_id": "CWE-078",
+      "normalized_cwe_id": "CWE-078",
+      "cwe_name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2021-21345",
+        "repo_dir": "/root/qlcoder/cves/CVE-2021-21345/xstream",
+        "diff_path": "/root/qlcoder/cves/CVE-2021-21345/CVE-2021-21345.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2021-21345/CVE-2021-21345-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2021-21345/CVE-2021-21345-fix"
+      },
+      "ground_truth_files": [
+        "xstream/src/java/com/thoughtworks/xstream/XStream.java"
+      ],
+      "ground_truth_methods": [
+        "xstream/src/java/com/thoughtworks/xstream/XStream.java:XStream:alias",
+        "xstream/src/java/com/thoughtworks/xstream/XStream.java:XStream:setupDefaultSecurity",
+        "xstream/src/java/com/thoughtworks/xstream/XStream.java:XStream:setupMappers",
+        "xstream/src/java/com/thoughtworks/xstream/XStream.java:XStream:setupSecurity",
+        "xstream/src/java/com/thoughtworks/xstream/XStream.java:XStream:unmarshal"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 5,
+        "non_test_rows": 5
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2022-28367": {
+      "cve_id": "CVE-2022-28367",
+      "family_id": "cwe-079-xss",
+      "project": "antisamy",
+      "project_slug": "nahsra__antisamy_CVE-2022-28367_1.6.5",
+      "github_username": "nahsra",
+      "github_repository_name": "antisamy",
+      "github_url": "https://github.com/nahsra/antisamy",
+      "cwe_id": "CWE-079",
+      "normalized_cwe_id": "CWE-079",
+      "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2022-28367",
+        "repo_dir": "/root/qlcoder/cves/CVE-2022-28367/antisamy",
+        "diff_path": "/root/qlcoder/cves/CVE-2022-28367/CVE-2022-28367.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2022-28367/CVE-2022-28367-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2022-28367/CVE-2022-28367-fix"
+      },
+      "ground_truth_files": [
+        "src/main/java/org/owasp/validator/html/scan/AntiSamyDOMScanner.java"
+      ],
+      "ground_truth_methods": [
+        "src/main/java/org/owasp/validator/html/scan/AntiSamyDOMScanner.java:AntiSamyDOMScanner:processStyleTag"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 1,
+        "non_test_rows": 1
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2022-29577": {
+      "cve_id": "CVE-2022-29577",
+      "family_id": "cwe-079-xss",
+      "project": "antisamy",
+      "project_slug": "nahsra__antisamy_CVE-2022-29577_1.6.6.1",
+      "github_username": "nahsra",
+      "github_repository_name": "antisamy",
+      "github_url": "https://github.com/nahsra/antisamy",
+      "cwe_id": "CWE-079",
+      "normalized_cwe_id": "CWE-079",
+      "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2022-29577",
+        "repo_dir": "/root/qlcoder/cves/CVE-2022-29577/antisamy",
+        "diff_path": "/root/qlcoder/cves/CVE-2022-29577/CVE-2022-29577.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2022-29577/CVE-2022-29577-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2022-29577/CVE-2022-29577-fix"
+      },
+      "ground_truth_files": [
+        "src/main/java/org/owasp/validator/html/scan/AntiSamyDOMScanner.java"
+      ],
+      "ground_truth_methods": [
+        "src/main/java/org/owasp/validator/html/scan/AntiSamyDOMScanner.java:AntiSamyDOMScanner:processStyleTag"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 1,
+        "non_test_rows": 1
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2023-33246": {
+      "cve_id": "CVE-2023-33246",
+      "family_id": "cwe-094-code-injection",
+      "project": "rocketmq",
+      "project_slug": "apache__rocketmq_CVE-2023-33246_5.1.0",
+      "github_username": "apache",
+      "github_repository_name": "rocketmq",
+      "github_url": "https://github.com/apache/rocketmq",
+      "cwe_id": "CWE-094",
+      "normalized_cwe_id": "CWE-094",
+      "cwe_name": "Improper Control of Generation of Code ('Code Injection')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2023-33246",
+        "repo_dir": "/root/qlcoder/cves/CVE-2023-33246/rocketmq",
+        "diff_path": "/root/qlcoder/cves/CVE-2023-33246/CVE-2023-33246.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2023-33246/CVE-2023-33246-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2023-33246/CVE-2023-33246-fix"
+      },
+      "ground_truth_files": [
+        "broker/src/main/java/org/apache/rocketmq/broker/processor/AdminBrokerProcessor.java",
+        "controller/src/main/java/org/apache/rocketmq/controller/processor/ControllerRequestProcessor.java",
+        "namesrv/src/main/java/org/apache/rocketmq/namesrv/processor/DefaultRequestProcessor.java"
+      ],
+      "ground_truth_methods": [
+        "broker/src/main/java/org/apache/rocketmq/broker/processor/AdminBrokerProcessor.java:AdminBrokerProcessor:updateBrokerConfig",
+        "controller/src/main/java/org/apache/rocketmq/controller/processor/ControllerRequestProcessor.java:ControllerRequestProcessor:handleGetControllerConfig",
+        "controller/src/main/java/org/apache/rocketmq/controller/processor/ControllerRequestProcessor.java:ControllerRequestProcessor:handleUpdateControllerConfig",
+        "namesrv/src/main/java/org/apache/rocketmq/namesrv/processor/DefaultRequestProcessor.java:DefaultRequestProcessor:getConfig",
+        "namesrv/src/main/java/org/apache/rocketmq/namesrv/processor/DefaultRequestProcessor.java:DefaultRequestProcessor:updateConfig"
+      ],
+      "ground_truth_summary": {
+        "num_files": 3,
+        "num_methods": 5,
+        "non_test_rows": 7
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2023-37582": {
+      "cve_id": "CVE-2023-37582",
+      "family_id": "cwe-094-code-injection",
+      "project": "rocketmq",
+      "project_slug": "apache__rocketmq_CVE-2023-37582_4.9.6",
+      "github_username": "apache",
+      "github_repository_name": "rocketmq",
+      "github_url": "https://github.com/apache/rocketmq",
+      "cwe_id": "CWE-094",
+      "normalized_cwe_id": "CWE-094",
+      "cwe_name": "Improper Control of Generation of Code ('Code Injection')",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2023-37582",
+        "repo_dir": "/root/qlcoder/cves/CVE-2023-37582/rocketmq",
+        "diff_path": "/root/qlcoder/cves/CVE-2023-37582/CVE-2023-37582.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2023-37582/CVE-2023-37582-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2023-37582/CVE-2023-37582-fix"
+      },
+      "ground_truth_files": [
+        "namesrv/src/main/java/org/apache/rocketmq/namesrv/processor/DefaultRequestProcessor.java"
+      ],
+      "ground_truth_methods": [
+        "namesrv/src/main/java/org/apache/rocketmq/namesrv/processor/DefaultRequestProcessor.java:DefaultRequestProcessor:updateConfig"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 1,
+        "non_test_rows": 1
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2025-27522": {
+      "cve_id": "CVE-2025-27522",
+      "family_id": "cwe-502-deserialization",
+      "project": "inlong",
+      "project_slug": "inlong_CVE-2025-27522_2.1.0-RC0",
+      "github_username": "apache",
+      "github_repository_name": "inlong",
+      "github_url": "https://github.com/apache/inlong",
+      "cwe_id": "CWE-502",
+      "normalized_cwe_id": "CWE-502",
+      "cwe_name": "CWE-502: Deserialization of Untrusted Data",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2025-27522",
+        "repo_dir": "/root/qlcoder/cves/CVE-2025-27522/inlong",
+        "diff_path": "/root/qlcoder/cves/CVE-2025-27522/CVE-2025-27522.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2025-27522/CVE-2025-27522-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2025-27522/CVE-2025-27522-fix"
+      },
+      "ground_truth_files": [
+        "inlong-manager/manager-pojo/src/main/java/org/apache/inlong/manager/pojo/util/MySQLSensitiveUrlUtils.java"
+      ],
+      "ground_truth_methods": [
+        "inlong-manager/manager-pojo/src/main/java/org/apache/inlong/manager/pojo/util/MySQLSensitiveUrlUtils.java:MySQLSensitiveUrlUtils:containSensitiveKey",
+        "inlong-manager/manager-pojo/src/main/java/org/apache/inlong/manager/pojo/util/MySQLSensitiveUrlUtils.java:MySQLSensitiveUrlUtils:filterSensitive"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 2,
+        "non_test_rows": 2
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2025-27526": {
+      "cve_id": "CVE-2025-27526",
+      "family_id": "cwe-502-deserialization",
+      "project": "inlong",
+      "project_slug": "inlong_CVE-2025-27526_2.1.0-RC0",
+      "github_username": "apache",
+      "github_repository_name": "inlong",
+      "github_url": "https://github.com/apache/inlong",
+      "cwe_id": "CWE-502",
+      "normalized_cwe_id": "CWE-502",
+      "cwe_name": "CWE-502: Deserialization of Untrusted Data",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2025-27526",
+        "repo_dir": "/root/qlcoder/cves/CVE-2025-27526/inlong",
+        "diff_path": "/root/qlcoder/cves/CVE-2025-27526/CVE-2025-27526.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2025-27526/CVE-2025-27526-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2025-27526/CVE-2025-27526-fix"
+      },
+      "ground_truth_files": [
+        "inlong-manager/manager-pojo/src/main/java/org/apache/inlong/manager/pojo/util/MySQLSensitiveUrlUtils.java"
+      ],
+      "ground_truth_methods": [
+        "inlong-manager/manager-pojo/src/main/java/org/apache/inlong/manager/pojo/util/MySQLSensitiveUrlUtils.java:MySQLSensitiveUrlUtils:filterSensitive",
+        "inlong-manager/manager-pojo/src/main/java/org/apache/inlong/manager/pojo/util/MySQLSensitiveUrlUtils.java:MySQLSensitiveUrlUtils:filterSensitiveKeyByBracket"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 2,
+        "non_test_rows": 2
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2025-27528": {
+      "cve_id": "CVE-2025-27528",
+      "family_id": "cwe-502-deserialization",
+      "project": "inlong",
+      "project_slug": "inlong_CVE-2025-27528_2.1.0-RC0",
+      "github_username": "apache",
+      "github_repository_name": "inlong",
+      "github_url": "https://github.com/apache/inlong",
+      "cwe_id": "CWE-502",
+      "normalized_cwe_id": "CWE-502",
+      "cwe_name": "CWE-502: Deserialization of Untrusted Data",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2025-27528",
+        "repo_dir": "/root/qlcoder/cves/CVE-2025-27528/inlong",
+        "diff_path": "/root/qlcoder/cves/CVE-2025-27528/CVE-2025-27528.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2025-27528/CVE-2025-27528-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2025-27528/CVE-2025-27528-fix"
+      },
+      "ground_truth_files": [
+        "inlong-manager/manager-pojo/src/main/java/org/apache/inlong/manager/pojo/util/MySQLSensitiveUrlUtils.java"
+      ],
+      "ground_truth_methods": [
+        "inlong-manager/manager-pojo/src/main/java/org/apache/inlong/manager/pojo/util/MySQLSensitiveUrlUtils.java:MySQLSensitiveUrlUtils:filterSensitive",
+        "inlong-manager/manager-pojo/src/main/java/org/apache/inlong/manager/pojo/util/MySQLSensitiveUrlUtils.java:MySQLSensitiveUrlUtils:filterSensitiveKeyByBracket"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 2,
+        "non_test_rows": 2
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2025-27531": {
+      "cve_id": "CVE-2025-27531",
+      "family_id": "cwe-502-deserialization",
+      "project": "inlong",
+      "project_slug": "inlong_CVE-2025-27531_2.0.0-RC0",
+      "github_username": "apache",
+      "github_repository_name": "inlong",
+      "github_url": "https://github.com/apache/inlong",
+      "cwe_id": "CWE-502",
+      "normalized_cwe_id": "CWE-502",
+      "cwe_name": "CWE-502: Deserialization of Untrusted Data",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2025-27531",
+        "repo_dir": "/root/qlcoder/cves/CVE-2025-27531/inlong",
+        "diff_path": "/root/qlcoder/cves/CVE-2025-27531/CVE-2025-27531.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2025-27531/CVE-2025-27531-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2025-27531/CVE-2025-27531-fix"
+      },
+      "ground_truth_files": [
+        "inlong-manager/manager-pojo/src/main/java/org/apache/inlong/manager/pojo/util/MySQLSensitiveUrlUtils.java",
+        "inlong-manager/manager-service/src/main/java/org/apache/inlong/manager/service/cluster/InlongClusterServiceImpl.java",
+        "inlong-manager/manager-service/src/main/java/org/apache/inlong/manager/service/resource/queue/pulsar/PulsarQueueResourceOperator.java"
+      ],
+      "ground_truth_methods": [
+        "inlong-manager/manager-pojo/src/main/java/org/apache/inlong/manager/pojo/util/MySQLSensitiveUrlUtils.java:MySQLSensitiveUrlUtils:filterSensitive",
+        "inlong-manager/manager-service/src/main/java/org/apache/inlong/manager/service/cluster/InlongClusterServiceImpl.java:InlongClusterServiceImpl:getDataProxyNodesByCluster",
+        "inlong-manager/manager-service/src/main/java/org/apache/inlong/manager/service/cluster/InlongClusterServiceImpl.java:InlongClusterServiceImpl:testSSHConnection",
+        "inlong-manager/manager-service/src/main/java/org/apache/inlong/manager/service/resource/queue/pulsar/PulsarQueueResourceOperator.java:PulsarQueueResourceOperator:queryLatestMessages"
+      ],
+      "ground_truth_summary": {
+        "num_files": 3,
+        "num_methods": 4,
+        "non_test_rows": 5
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    },
+    "CVE-2025-27818": {
+      "cve_id": "CVE-2025-27818",
+      "family_id": "cwe-502-deserialization",
+      "project": "kafka",
+      "project_slug": "apache__kafka_CVE-2025-27818_3.9.0",
+      "github_username": "apache",
+      "github_repository_name": "kafka",
+      "github_url": "https://github.com/apache/kafka",
+      "cwe_id": "CWE-502",
+      "normalized_cwe_id": "CWE-502",
+      "cwe_name": "Deserialization of Untrusted Data",
+      "local_paths": {
+        "cve_dir": "/root/qlcoder/cves/CVE-2025-27818",
+        "repo_dir": "/root/qlcoder/cves/CVE-2025-27818/kafka",
+        "diff_path": "/root/qlcoder/cves/CVE-2025-27818/CVE-2025-27818.diff",
+        "vuln_db_path": "/root/qlcoder/cves/CVE-2025-27818/CVE-2025-27818-vul",
+        "fix_db_path": "/root/qlcoder/cves/CVE-2025-27818/CVE-2025-27818-fix"
+      },
+      "ground_truth_files": [
+        "clients/src/main/java/org/apache/kafka/common/security/JaasContext.java"
+      ],
+      "ground_truth_methods": [
+        "clients/src/main/java/org/apache/kafka/common/security/JaasContext.java:JaasContext:defaultContext",
+        "clients/src/main/java/org/apache/kafka/common/security/JaasContext.java:JaasContext:load"
+      ],
+      "ground_truth_summary": {
+        "num_files": 1,
+        "num_methods": 2,
+        "non_test_rows": 2
+      },
+      "local_status": {
+        "cve_dir_exists": true,
+        "repo_exists": true,
+        "diff_exists": true,
+        "vuln_db_exists": true,
+        "fix_db_exists": true,
+        "runnable_seed": true
+      }
+    }
+  }
+}

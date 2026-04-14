@@ -1,0 +1,199 @@
+{
+  "name": "qlcoder_pilot_benchmark",
+  "version": "0.1",
+  "description": "Curated pilot benchmark for patch-to-variant CodeQL synthesis. Each seed CVE keeps the original vuln/fix evaluation pair and adds positive variants plus a small number of contrastive negatives when same-repo alternatives exist.",
+  "families": [
+    {
+      "family_id": "cwe-022-path-traversal",
+      "family_name": "Path Traversal",
+      "expected_cwe_ids": ["CWE-022", "CWE-22"],
+      "seeds": [
+        {
+          "cve_id": "CVE-2016-9177",
+          "note": "Spark path traversal seed with one same-repo sibling and two cross-repo positives.",
+          "positive_variants": [
+            {
+              "cve_id": "CVE-2018-9159",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same vulnerability family in spark."
+            },
+            {
+              "cve_id": "CVE-2018-1000850",
+              "variant_type": "cross_repo",
+              "construction_note": "Cross-repo path traversal in retrofit."
+            },
+            {
+              "cve_id": "CVE-2018-17297",
+              "variant_type": "cross_repo",
+              "construction_note": "Cross-repo path traversal in hutool."
+            }
+          ],
+          "hard_negatives": []
+        },
+        {
+          "cve_id": "CVE-2018-12542",
+          "note": "Vert.x path traversal seed with a same-repo sibling and cross-repo positives.",
+          "positive_variants": [
+            {
+              "cve_id": "CVE-2019-17640",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same vulnerability family in vertx-web."
+            },
+            {
+              "cve_id": "CVE-2018-1000850",
+              "variant_type": "cross_repo",
+              "construction_note": "Cross-repo path traversal in retrofit."
+            },
+            {
+              "cve_id": "CVE-2019-0225",
+              "variant_type": "cross_repo",
+              "construction_note": "Cross-repo path traversal in jspwiki."
+            }
+          ],
+          "hard_negatives": []
+        }
+      ]
+    },
+    {
+      "family_id": "cwe-079-xss",
+      "family_name": "Cross-Site Scripting",
+      "expected_cwe_ids": ["CWE-079", "CWE-79"],
+      "seeds": [
+        {
+          "cve_id": "CVE-2019-10077",
+          "note": "JSPWiki XSS seed with multiple same-repo sibling CVEs and one same-repo contrastive path traversal negative.",
+          "positive_variants": [
+            {
+              "cve_id": "CVE-2019-10078",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same XSS family in jspwiki."
+            },
+            {
+              "cve_id": "CVE-2019-10076",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same XSS family in jspwiki."
+            }
+          ],
+          "hard_negatives": [
+            {
+              "cve_id": "CVE-2019-0225",
+              "negative_type": "same_repo_other_family",
+              "construction_note": "Same repository but path traversal instead of XSS."
+            }
+          ]
+        },
+        {
+          "cve_id": "CVE-2017-14735",
+          "note": "AntiSamy XSS seed with multiple same-repo sibling CVEs.",
+          "positive_variants": [
+            {
+              "cve_id": "CVE-2016-10006",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same XSS family in antisamy."
+            },
+            {
+              "cve_id": "CVE-2022-29577",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same XSS family in antisamy."
+            },
+            {
+              "cve_id": "CVE-2022-28367",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same XSS family in antisamy."
+            }
+          ],
+          "hard_negatives": []
+        }
+      ]
+    },
+    {
+      "family_id": "cwe-078-command-injection",
+      "family_name": "Command Injection",
+      "expected_cwe_ids": ["CWE-078"],
+      "seeds": [
+        {
+          "cve_id": "CVE-2013-7285",
+          "note": "XStream command injection seed with two same-repo sibling CVEs.",
+          "positive_variants": [
+            {
+              "cve_id": "CVE-2021-21345",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same command injection family in xstream."
+            },
+            {
+              "cve_id": "CVE-2020-26217",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same command injection family in xstream."
+            }
+          ],
+          "hard_negatives": []
+        }
+      ]
+    },
+    {
+      "family_id": "cwe-094-code-injection",
+      "family_name": "Code Injection",
+      "expected_cwe_ids": ["CWE-094"],
+      "seeds": [
+        {
+          "cve_id": "CVE-2023-37582",
+          "note": "RocketMQ code injection seed with a same-repo sibling.",
+          "positive_variants": [
+            {
+              "cve_id": "CVE-2023-33246",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same code injection family in rocketmq."
+            }
+          ],
+          "hard_negatives": []
+        }
+      ]
+    },
+    {
+      "family_id": "cwe-502-deserialization",
+      "family_name": "Deserialization of Untrusted Data",
+      "expected_cwe_ids": ["CWE-502"],
+      "seeds": [
+        {
+          "cve_id": "CVE-2025-27818",
+          "note": "Kafka deserialization seed paired with cross-repo variants from InLong.",
+          "positive_variants": [
+            {
+              "cve_id": "CVE-2025-27531",
+              "variant_type": "cross_repo",
+              "construction_note": "Cross-repo deserialization issue in InLong."
+            }
+          ],
+          "hard_negatives": []
+        },
+        {
+          "cve_id": "CVE-2025-27531",
+          "note": "InLong deserialization seed with multiple same-repo siblings and one cross-repo positive.",
+          "positive_variants": [
+            {
+              "cve_id": "CVE-2025-27526",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same deserialization family in InLong."
+            },
+            {
+              "cve_id": "CVE-2025-27528",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same deserialization family in InLong."
+            },
+            {
+              "cve_id": "CVE-2025-27522",
+              "variant_type": "same_repo",
+              "construction_note": "Same repository and same deserialization family in InLong."
+            },
+            {
+              "cve_id": "CVE-2025-27818",
+              "variant_type": "cross_repo",
+              "construction_note": "Cross-repo deserialization issue in Kafka."
+            }
+          ],
+          "hard_negatives": []
+        }
+      ]
+    }
+  ]
+}

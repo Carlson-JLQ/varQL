@@ -1,0 +1,49 @@
+services:
+  chroma:
+    image: chromadb/chroma:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data/chroma_db:/chroma/chroma
+    environment:
+      - CHROMA_SERVER_AUTHN_CREDENTIALS=test
+      - CHROMA_SERVER_AUTHN_PROVIDER=chromadb.auth.token_authn.TokenAuthenticationServerProvider
+
+  app:
+    build:
+      context: .
+      args:
+        APP_UID: ${APP_UID:-1000}
+        APP_GID: ${APP_GID:-1000}
+    depends_on:
+      - chroma
+    volumes:
+      - .:/app
+      - ${CODEQL_HOME:-~/codeql}:/opt/codeql:ro
+      - ${CODEQL_LSP_MCP_PATH:-~/codeql-lsp-mcp}:/opt/codeql-lsp-mcp:ro
+    environment:
+      # -- Agent API keys --
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - CLAUDE_CODE_OAUTH_TOKEN=${CLAUDE_CODE_OAUTH_TOKEN}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      # -- Ollama (running on host) --
+      - OLLAMA_HOST=${OLLAMA_HOST:-http://host.docker.internal:11434}
+      # -- ChromaDB --
+      - CHROMA_HOST=chroma
+      - CHROMA_PORT=8000
+      - CHROMA_AUTH_TOKEN=test
+      # -- Tool paths --
+      - CODEQL_HOME=/opt/codeql
+      - CODEQL_PATH=/opt/codeql/codeql
+      - CODEQL_SEARCH_PATH=/opt/codeql
+      - CODEQL_LSP_MCP_PATH=/opt/codeql-lsp-mcp
+      - SECURITY_QLPACK_PATH=${SECURITY_QLPACK_PATH:-}
+      - LIBRARY_QLPACK_PATH=${LIBRARY_QLPACK_PATH:-}
+      # -- Home / config --
+      - HOME=/home/node
+    # Allow container to reach services on the host (Ollama, etc.)
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    stdin_open: true
+    tty: true
