@@ -38,8 +38,8 @@ def _latest_subdir(path: str) -> str | None:
         return None
     return sorted(candidates)[-1]
 # path to vulnerable and fixed CodeQL databases for CVEs 
-# CVES_PATH = f"{QL_CODER_ROOT_DIR}/cves"
-CVES_PATH = "/root/qlcoder/cves"
+CVES_PATH = f"{QL_CODER_ROOT_DIR}/cves"
+# CVES_PATH = "/root/qlcoder/cves"
 LOGS_DIR = f"{QL_CODER_ROOT_DIR}/logs"
 # contains Java CVE project fix metadata. Adapted from CWE-Bench-Java 
 FIX_INFO=f"{QL_CODER_ROOT_DIR}/data/fix_info.csv"

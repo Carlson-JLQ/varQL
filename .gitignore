@@ -205,11 +205,12 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
-
+codeql-bundle-linux64.tar.gz
 # QLCoder output (keep directory, ignore contents)
 output/*
 !output/.gitkeep
-
+cves_user/*
 cves
 codeql-lsp-mcp
 data/chroma_db
+codeql-lsp-mcp
